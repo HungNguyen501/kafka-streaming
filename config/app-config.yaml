@@ -1,0 +1,45 @@
+kafka:
+  kafka_brokers: localhost:9092
+  sasl_protocol: SASL_PLAINTEXT
+  sasl_mechanism: SCRAM-SHA-256
+  sasl_user: test
+  sasl_password: test
+  consumer:
+    max_block_size: 10000
+    max_data_size: 5242880 # 5 MB
+    max_consume_time: 60 # 60s
+    poll_timeout_ms: 30000 # 30s
+    poll_max_records: 1000
+
+database:
+  protocol: postgresql
+  url: localhost
+  replica_url: localhost
+  name: local
+  username: local
+  password: local
+  port: 5432
+  max_db_conns: 30
+  max_conn_lifetime: 1800 # 30 minutes
+  max_conn_idle_time: 300 # 5 minutes
+
+task_validation_interval: 10
+
+tasks:
+  task1:
+    state_type: consumer
+    function: stream_kafka
+    arguments:
+      topic: "my-topic-1"
+      group_id: "test-echo-1"
+  task2:
+    state_type: consumer
+    function: stream_kafka
+    arguments:
+      topic: "my-topic-2"
+      group_id: "test-echo-2"
+  task3:
+    state_type: minimal
+    function: greeting
+    arguments:
+      message: "Welcome to kafka-streaming project"

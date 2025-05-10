@@ -1,0 +1,76 @@
+[tool.flake8]
+max-line-length = 120
+exclude = [
+    ".git",
+    "__pycache__",
+    "venv",
+]
+
+
+# https://github.com/atlassian-api/atlassian-python-api/blob/master/pyproject.toml
+[tool.pylint.MASTER]
+ignore-paths = [
+    ".git",
+    "__pycache__",
+    "venv",
+]
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.DESIGN]
+# Maximum number of arguments for function / method.
+max-args = 6
+# Maximum number of attributes for a class (see R0902).
+max-attributes = 10
+
+[tool.pylint.messages_control]
+disable = [
+  "logging-fstring-interpolation",
+  "no-value-for-parameter",
+  "too-many-positional-arguments"
+]
+
+
+[tool.pylint.TYPECHECK]
+signature-mutators = [
+    "click.decorators.option",
+    "click.decorators.argument",
+    "click.decorators.version_option",
+    "click.decorators.help_option",
+    "click.decorators.pass_context",
+    "click.decorators.confirmation_option",
+]
+
+# https://coverage.readthedocs.io/en/latest/config.html
+[tool.coverage.run]
+branch = true
+omit = [
+    "src/calculate_statistics/*",
+    "src/pool_api/api/tests/integration/*.py",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+    "Only run tests when enabling integration_tests"
+    ]
+
+ignore_errors = true
+
+[tool.coverage.html]
+directory = "coverage_html_report"
