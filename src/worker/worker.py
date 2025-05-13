@@ -30,7 +30,7 @@ class WorkerState(ABC):
 class MinimalState(WorkerState):
     """A class that implements simple attributes for worker state"""
     def __init__(self,):
-        """Init object's attrinutes"""
+        """Init object's attributes"""
         self._stop_event = Event()
 
     def reset(self):

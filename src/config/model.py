@@ -53,5 +53,5 @@ class AppConfig:
     """Application configurations"""
     kafka: KafkaConfig
     db: DbConfig
-    task_validation_interval: int
+    worker_healthcheck_interval: int
     tasks: List[TaskConfig]

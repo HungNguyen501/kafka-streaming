@@ -9,7 +9,7 @@ import src.task
 
 
 class Coordinator:
-    """A class that implements methods for coordinating a group of workers"""
+    """A class that coordinates a group of workers"""
     def __init__(self,config: AppConfig):
         """Init object's attributes"""
         self.workers: Dict[str, Worker] = {}
@@ -17,9 +17,7 @@ class Coordinator:
         self.validation_time = 0
 
     def start(self,):
-        """
-            Start to assign tasks to workers and do a cleanup task
-        """
+        """Start to assign tasks to workers and do clean up dead workers by interval"""
         for task in self.config.tasks:
             worker = Worker(
                 name=task.name,
@@ -32,7 +30,7 @@ class Coordinator:
 
         while True:
             time_now = time.time()
-            if time_now - self.validation_time > self.config.task_validation_interval:
+            if time_now - self.validation_time > self.config.worker_healthcheck_interval:
                 self.validation_time = time_now
                 self.cleanup_dead_workers()
                 if not self.workers:

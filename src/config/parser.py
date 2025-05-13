@@ -26,5 +26,5 @@ def parse_config(file_path: str = "./config/app-config.yaml") -> AppConfig:
             kafka=kafka,
             db=db,
             tasks=tasks,
-            task_validation_interval=data["task_validation_interval"],
+            worker_healthcheck_interval=data["worker_healthcheck_interval"],
         )

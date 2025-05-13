@@ -23,7 +23,7 @@ database:
   max_conn_lifetime: 1800 # 30 minutes
   max_conn_idle_time: 300 # 5 minutes
 
-task_validation_interval: 10
+worker_healthcheck_interval: 10 # 10s
 
 tasks:
   task1:
